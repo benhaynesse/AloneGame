@@ -3,6 +3,7 @@ package HUD;
 import Main.Game;
 import Main.Handler;
 
+
 /**
  * Created by Ben on 26/01/2017.
  */
@@ -13,6 +14,8 @@ public class HUD {
     private boolean visible = false;
     private int x, y, width, height;
 
+
+
     public HUD(Handler handler){
         this.handler = handler;
         this.game = handler.getGame();
@@ -20,6 +23,7 @@ public class HUD {
         this.height = 100;
         this.x = 0;
         this.y = game.height - this.height;
+
     }
 
 
