@@ -1,6 +1,7 @@
 package Main;
 
 import Entities.GameObject;
+import Entities.LevelBlock;
 import Entities.ObjectId;
 import Entities.Player;
 import Level.LevelLoader;
@@ -11,35 +12,38 @@ import java.util.ArrayList;
 /**
  * Created by Ben on 19/01/2017.
  */
-public class Game extends PApplet{
+public class Game extends PApplet {
 
     private Handler handler;
     private HUD.HUD hud;
-    private ArrayList<GameObject> objects;
+    ArrayList<GameObject> objects;
 
 
-
-    public void settings(){
-        size(900,600);
+    public void settings() {
+        size(900, 600);
     }
 
-    public void setup(){
+    public void setup() {
         handler = new Handler(this);
-        objects = handler.getObjects();
         handler.addObject(new Player(handler, 50,50,ObjectId.PLAYER));
+        objects = handler.getObjects();
+
+
+
+
         hud = new HUD.HUD(handler);
 
     }
 
 
-    public void update(){
+    public void update() {
         for(GameObject obj : objects){
             obj.update(objects);
         }
     }
 
 
-    public void draw(){
+    public void draw() {
         background(0);
         frame.requestFocus();
 
@@ -49,44 +53,49 @@ public class Game extends PApplet{
             obj.render();
         }
 
+
         hud.render();
 
     }
 
-    public void mousePressed(){
-
-    }
-
-    public void mouseReleased(){
-
-    }
-
-    public void mouseMoved(){
-        if(hud.isVisible()) {
-            if (mouseX > hud.getX() && mouseX < hud.getX() + hud.getWidth()) {
-                if (mouseY > hud.getY() && mouseY < hud.getY() + hud.getHeight()) {
-                    System.out.println("INSIDE HUD");
-                }
-            }
+    public void mousePressed() {
+        if (hud.getBounds().contains(mouseX, mouseY)) {
+            if (hud.isVisible())
+                hud.mousePressed(mouseX, mouseY);
         }
     }
 
+    public void mouseDragged() {
 
-    public void keyPressed(){
-        if(key == 9){
-            if(hud.isVisible()){
+        if (hud.isVisible()) {
+            hud.mouseDragged(mouseX, mouseY);
+        }
+    }
+
+    public void mouseReleased() {
+
+        if (hud.isVisible()) {
+            hud.mouseReleased(mouseX, mouseY);
+        }
+
+    }
+
+
+    public void keyPressed() {
+        if (key == 9) {
+            if (hud.isVisible()) {
                 hud.setVisible(false);
-            }else{
+            } else {
                 hud.setVisible(true);
             }
 
-        }else {
+        } else {
             handler.keyPressed(key);
         }
 
     }
 
-    public void keyReleased(){
+    public void keyReleased() {
         handler.keyReleased(key);
     }
 
