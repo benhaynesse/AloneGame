@@ -33,6 +33,14 @@ public class Handler {
         return objects;
     }
 
+    public void mousePressed(int x, int y){
+
+    }
+
+    public void mouseReleased(int x, int y){
+
+    }
+
     public void keyPressed(int key){
 
         if(key == 'd'){
@@ -45,6 +53,8 @@ public class Handler {
         if(key == ' '){
             getPlayer().jump();
         }
+
+
 
 
     }

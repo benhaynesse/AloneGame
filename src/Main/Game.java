@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Game extends PApplet{
 
     private Handler handler;
+    private HUD.HUD hud;
     private ArrayList<GameObject> objects;
 
 
@@ -26,6 +27,7 @@ public class Game extends PApplet{
         handler = new Handler(this);
         objects = handler.getObjects();
         handler.addObject(new Player(handler, 50,50,ObjectId.PLAYER));
+        hud = new HUD.HUD(handler);
 
     }
 
@@ -47,6 +49,7 @@ public class Game extends PApplet{
             obj.render();
         }
 
+        hud.render();
 
     }
 
@@ -58,8 +61,29 @@ public class Game extends PApplet{
 
     }
 
+    public void mouseMoved(){
+        if(hud.isVisible()) {
+            if (mouseX > hud.getX() && mouseX < hud.getX() + hud.getWidth()) {
+                if (mouseY > hud.getY() && mouseY < hud.getY() + hud.getHeight()) {
+                    System.out.println("INSIDE HUD");
+                }
+            }
+        }
+    }
+
+
     public void keyPressed(){
-        handler.keyPressed(key);
+        if(key == 9){
+            if(hud.isVisible()){
+                hud.setVisible(false);
+            }else{
+                hud.setVisible(true);
+            }
+
+        }else {
+            handler.keyPressed(key);
+        }
+
     }
 
     public void keyReleased(){
