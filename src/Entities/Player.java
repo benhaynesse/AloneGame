@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Player extends GameObject {
 
-    private final int MAX_SPEED = 8;
+    private final int MAX_SPEED = 12;
     private int velX, velY;
     private int gravity = 2;
     private boolean falling = true, jumping = false;
@@ -56,6 +56,9 @@ public class Player extends GameObject {
 
                 //If its a tile
                 case BLOCK:
+                    blockCollision(obj);
+                    break;
+                case TREE:
                     blockCollision(obj);
                     break;
 
@@ -114,7 +117,7 @@ public class Player extends GameObject {
     }
 
     private Rectangle getTopBounds(){
-        return new Rectangle(x+(width/2)- (width/2)/2, y, width/2, height/2);
+        return new Rectangle(x+(width/2)-(width/2)/2, y, width/2, height/2);
     }
 
 

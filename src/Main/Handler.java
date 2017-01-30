@@ -44,10 +44,10 @@ public class Handler {
     public void keyPressed(int key){
 
         if(key == 'd'){
-            getPlayer().move(1);
+            getPlayer().move(2);
         }
         if(key == 'a'){
-            getPlayer().move(-1);
+            getPlayer().move(-2);
         }
 
         if(key == ' '){
